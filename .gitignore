@@ -1,9 +1,14 @@
 /env
 
 # Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Other common ignores
+*.log
+venv/
 
 # C extensions
 *.so
@@ -107,3 +112,6 @@ venv.bak/
 
 # Visual Studio Code
 .vscode/
+
+# Log files
+*.log

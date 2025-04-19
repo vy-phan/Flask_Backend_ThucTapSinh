@@ -6,27 +6,33 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from logging.handlers import TimedRotatingFileHandler
+from flask_migrate import Migrate
 
 # Initialize extensions
 db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app(config_class=Config):
     # Initialize Flask app
     app = Flask(__name__)
     app.config.from_object(config_class)
     
-
-    app.config['MEDIA_FOLDER'] = 'media'
+    # khởi tạo đối tượng SQLAlchemy
     db.init_app(app)
+    migrate.init_app(app, db) 
+    app.config['MEDIA_FOLDER'] = 'media'
+
+    # cho phép các website nào được quyền truy cập vào api của mình 
+    #  tạm thời cho * là tất cả trước mắt 
     CORS(app, resources={r"/api/*": {"origins": "*"}})
     configure_logging(app)
     api = Api(app)
     
-    # Register blueprints
-    from app.routes import main
-    app.register_blueprint(main, url_prefix='/api')
+    # api cha để chứa các api con
+    from app.routes import api_bp  
+    app.register_blueprint(api_bp, url_prefix='/api')
     
-    # Error handlers
+    # Error handlers ( xử lí lỗi )
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({
@@ -44,7 +50,7 @@ def create_app(config_class=Config):
     return app
 
 
-# Configures the logging
+# Configures the logging ( log ra mọi kết quả )
 def configure_logging(app):
     handler = TimedRotatingFileHandler('flask-template.log', when='midnight', interval=1, backupCount=10)
     handler.setLevel(logging.INFO) 
