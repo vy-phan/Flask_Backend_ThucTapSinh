@@ -11,3 +11,5 @@ class Task(db.Model):
     status = db.Column(db.Enum('Đã giao', 'Đang thực hiện', 'Đã hoàn thành'), default='Đã giao')  # Trạng thái
     created_by = db.Column(db.Integer, nullable=False)  # ID của người tạo
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())  # Thời gian tạo
+
+

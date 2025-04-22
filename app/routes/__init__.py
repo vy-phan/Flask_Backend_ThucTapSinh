@@ -10,3 +10,6 @@ api_bp.register_blueprint(user_bp)
 
 from .task_routes import task_bp
 api_bp.register_blueprint(task_bp)
+
+from .task_detail_routes import task_detail_bp
+api_bp.register_blueprint(task_detail_bp)

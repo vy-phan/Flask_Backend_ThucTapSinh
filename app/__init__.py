@@ -32,7 +32,7 @@ def create_app(config_class=Config):
     from app.routes import api_bp  
     app.register_blueprint(api_bp, url_prefix='/api')
     
-    # Error handlers ( xử lí lỗi )
+    # Error handlers ( xử lí lỗi ) xử lý các lỗi 404, 500
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({
