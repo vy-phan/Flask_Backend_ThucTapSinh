@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify
 
-intern_bp = Blueprint('intern', __name__ , url_prefix='/intern')
+user_bp = Blueprint('user', __name__ , url_prefix='/user')
 
-@intern_bp.route('/',methods=['GET'])
-def get_all_interns():
+@user_bp.route('/',methods=['GET'])
+def get_all_users():
     return jsonify({
         'success': True,
         'data': "Thông tin tất cả thực tập sinh",
