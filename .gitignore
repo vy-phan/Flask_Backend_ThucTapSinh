@@ -7,6 +7,7 @@ __pycache__/
 # Other common ignores
 *.log
 venv/
+.env 
 
 # C extensions
 *.so
