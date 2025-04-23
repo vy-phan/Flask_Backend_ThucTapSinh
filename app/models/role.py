@@ -1,5 +1,6 @@
-from enum import Enum as UserEnum
+from enum import Enum 
 
-class UserRole(UserEnum):
-    MANAGER = 'Quản lý'
-    INTERN = 'Thực tập sinh'
+class UserRole(Enum):
+    INTERN = 'INTERN'
+    MANAGER = 'MANAGER'  # Thay vì 'Quản lý'
+    ADMIN = 'ADMIN'
