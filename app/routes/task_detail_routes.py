@@ -29,6 +29,10 @@ def create_task_detail():
         if not data:
             return jsonify({'success': False, 'error': 'No data provided'}), 400
 
+        # Ensure assignees is a list of usernames
+        if 'assignees' in data and not isinstance(data['assignees'], list):
+            return jsonify({'success': False, 'error': 'Assignees must be a list of usernames'}), 400
+
         new_detail = task_detail_service.create(data)
         if not new_detail:
             return jsonify({'success': False, 'error': 'Failed to create task detail'}), 500
