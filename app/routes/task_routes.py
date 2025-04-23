@@ -75,7 +75,7 @@ def create_task():
             }), 400
             
 
-        # Tạo nhiệm vụ với hoặc không có tệp đính kèm
+        # Create task or not attachments
         new_task = task_service.create(data, file_paths)
         if not new_task:
             return jsonify({
