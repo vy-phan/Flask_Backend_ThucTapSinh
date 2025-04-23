@@ -6,3 +6,4 @@ from .task import Task
 from .user import User
 from .role import UserRole
 from .task_detail import Task_Detail  
+from .task_attachment import TaskAttachment
