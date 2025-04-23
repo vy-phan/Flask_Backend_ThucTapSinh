@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app, send_file
 from ..services import TaskService
 from ..models import TaskAttachment  # Nhập TaskAttachment để tải xuống tệp (tùy chọn)
 from datetime import datetime
@@ -15,6 +15,22 @@ def get_all_tasks():
         return jsonify({
             'success': True,
             'data': tasks
+        }), 200
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@task_bp.route('/<int:task_id>', methods=['GET'])
+def get_task_by_id(task_id):
+    try:
+        task = task_service.get_by_id(task_id)
+        if not task:
+            return jsonify({
+                'success': False,
+                'error': f'Task with ID {task_id} not found'
+            }), 404
+        return jsonify({
+            'success': True,
+            'data': task
         }), 200
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
